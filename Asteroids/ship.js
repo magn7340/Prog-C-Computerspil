@@ -24,11 +24,20 @@ function Ship() {
         this.vel.add(force) //Plusser retningen oveni hastigheden
     }
 
+    this.hits = function(asteroid) {
+        var d = dist(this.pos.x, this.pos.y, asteroid.pos.x, asteroid.pos.y);
+        if (d < this.r + asteroids.r) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     this.render = function() { //Renderer skibet
         push(); //Gør at skibets position ikke ændrer på andet (translate)
         translate(this.pos.x, this.pos.y); //Oversætter positionen til x- og y-koordinater
         rotate(this.heading + PI / 2); //Får den til at roterer
-        noFill(); //Ingen fyldfarve til skibet
+        fill(0); //Sort fyldfarve til skibet, så laserne ikke ses
         stroke(255); //Hvid kant rundt om skibet
         triangle(-this.r, this.r, this.r, this.r, 0, -this.r); //Trekant med this.r værdi som koordinater
         pop(); //Gør at skibets position ikke ændrer på andet (translate)
