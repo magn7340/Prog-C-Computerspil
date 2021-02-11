@@ -43,28 +43,29 @@ function draw() {
 
         console.log(lasers.length);
 
-        ship.render(); //Kalder skibet/viser skibet
-        ship.turn(); //Sørger for at skibet altid drejer selvom det er 0
-        ship.update(); //Opdatere skibet
-        ship.edges(); //Gør at når skibet flyver ud over en side, så flyver den ind igen på modsatte side
 
     }
+    ship.render(); //Kalder skibet/viser skibet
+    ship.turn(); //Sørger for at skibet altid drejer selvom det er 0
+    ship.update(); //Opdatere skibet
+    ship.edges(); //Gør at når skibet flyver ud over en side, så flyver den ind igen på modsatte side
 
-    function keyPressed() { //Hver gang knap trykkes, kører funktionen
-        if (key == ' ') { //Hvis mellemrumsknappen bliver trykket
-            lasers.push(new Laser(ship.pos, ship.heading)); //Putter ny laser i arayet, og laver laserne i skibets position og retning
-        } else if (keyCode == RIGHT_ARROW) { //Vælger at knappen er højre piletast
-            ship.setRotation(0.1); //Værdi skibet drejer med
-        } else if (keyCode == LEFT_ARROW) { //Hvis venstre piletast bliver trykket 
-            ship.setRotation(-0.1); //Værdi skibet drejer med
-        } else if (keyCode == UP_ARROW) { //Hvis op piletast bliver trykket
-            ship.boosting(true); //Værdi for skibets hastighed
-        }
-    }
+}
 
-    function keyReleased() {
-        ship.setRotation(0); //Når man slipper knappen stopper rotationen
-        ship.boosting(false); //Skibbet flyver ikke
+function keyPressed() { //Hver gang knap trykkes, kører funktionen
+    if (key == ' ') { //Hvis mellemrumsknappen bliver trykket
+        lasers.push(new Laser(ship.pos, ship.heading)); //Putter ny laser i arayet, og laver laserne i skibets position og retning
+    } else if (keyCode == RIGHT_ARROW) { //Vælger at knappen er højre piletast
+        ship.setRotation(0.1); //Værdi skibet drejer med
+    } else if (keyCode == LEFT_ARROW) { //Hvis venstre piletast bliver trykket 
+        ship.setRotation(-0.1); //Værdi skibet drejer med
+    } else if (keyCode == UP_ARROW) { //Hvis op piletast bliver trykket
+        ship.boosting(true); //Værdi for skibets hastighed
     }
+}
+
+function keyReleased() {
+    ship.setRotation(0); //Når man slipper knappen stopper rotationen
+    ship.boosting(false); //Skibbet flyver ikke
 }
 // video 2, christian 15:48
