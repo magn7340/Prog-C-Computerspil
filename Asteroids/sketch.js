@@ -5,7 +5,7 @@ var lasers = []; // Globalt variabel (Array til laser)
 function setup() {
     createCanvas(windowWidth - 25, windowHeight - 25);
     ship = new Ship(); //Kalder at der skal laves et nyt skib
-    for (var i = 0; i < 5; i++) { //Antal asteroider
+    for (var i = 0; i < 15; i++) { //Antal asteroider
         asteroids.push(new Asteroid()); //Tilføjer ny astroide
     }
 }
