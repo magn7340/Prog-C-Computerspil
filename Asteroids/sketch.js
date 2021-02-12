@@ -2,6 +2,14 @@ var ship; //Global variabel
 var asteroids = []; //Globalt variabel (Array til asteroids)
 var lasers = []; // Globalt variabel (Array til laser)
 
+var pewSound;
+
+function preload() {
+    pewSound = loadSound("../Lyde/PEW-V2.mp3");
+    prkkkhSound = loadSound("../Lyde/Programering prkkkh.mp3");
+    boostSound = loadSound("../Lyde/Programering Christian.mp3");
+}
+
 function setup() {
     createCanvas(windowWidth - 25, windowHeight - 25);
     ship = new Ship(); //Kalder at der skal laves et nyt skib
@@ -31,11 +39,13 @@ function draw() {
             for (var j = asteroids.length - 1; j >= 0; j--) { //Tjekker om laser rammer asteroide
                 if (lasers[i].hits(asteroids[j])) { //Hvis laserne rammer asteroiderne
                     if (asteroids[j].r > 10) { //hvis under 10 asteroider
+                        prkkkhSound.play();
                         var newAsteroids = asteroids[j].breakup(); //danner nye asteroider
                         asteroids = asteroids.concat(newAsteroids); //samler arrays
                     }
                     asteroids.splice(j, 1); //
                     lasers.splice(i, 1);
+                    prkkkhSound.play();
                     break;
                 }
             }
@@ -54,17 +64,25 @@ function draw() {
 
 function keyPressed() { //Hver gang knap trykkes, kører funktionen
     if (key == ' ') { //Hvis mellemrumsknappen bliver trykket
+        pewSound.play();
         lasers.push(new Laser(ship.pos, ship.heading)); //Putter ny laser i arayet, og laver laserne i skibets position og retning
     } else if (keyCode == RIGHT_ARROW) { //Vælger at knappen er højre piletast
         ship.setRotation(0.1); //Værdi skibet drejer med
     } else if (keyCode == LEFT_ARROW) { //Hvis venstre piletast bliver trykket 
         ship.setRotation(-0.1); //Værdi skibet drejer med
     } else if (keyCode == UP_ARROW) { //Hvis op piletast bliver trykket
+        boostSound.play();
         ship.boosting(true); //Værdi for skibets hastighed
     }
+
+    if (asteroids.length === undefined || asteroids.length == 0) {
+        alert("You won! Wuhuuu! Refresh to restart")
+    }
+
 }
 
 function keyReleased() {
+    boostSound.stop();
     ship.setRotation(0); //Når man slipper knappen stopper rotationen
     ship.boosting(false); //Skibbet flyver ikke
 }
