@@ -39,7 +39,6 @@ function draw() {
             for (var j = asteroids.length - 1; j >= 0; j--) { //Tjekker om laser rammer asteroide
                 if (lasers[i].hits(asteroids[j])) { //Hvis laserne rammer asteroiderne
                     if (asteroids[j].r > 10) { //hvis under 10 asteroider
-                        prkkkhSound.play();
                         var newAsteroids = asteroids[j].breakup(); //danner nye asteroider
                         asteroids = asteroids.concat(newAsteroids); //samler arrays
                     }
